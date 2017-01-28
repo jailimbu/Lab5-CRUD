@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+
+
+
+
+<h:body>
+
+<h:form>
+
+		<h3>Enter User</h3>
+    		<table>
+	    		<tr>
+	    			<td>Name :</td>
+	    			<td><h:inputText value="#{user.name}" /></td>
+	    		</tr>
+	    		<tr>
+	    			<td>Password :</td>
+	    			<td><h:inputText value="#{user.password}" /></td>
+	    		</tr>
+    		</table>
+
+    		<h:commandButton value="Add User" action="#{user.addUser}" />
+
+
+
+<br/>
+<br/>
+<br/>
+
+
+
+
+<h:dataTable value="#{user.getData()}" var="item">
+
+	<h:column>
+	
+		<f:facet name="header">
+			Name
+		</f:facet>
+		<!-- first column components -->
+		<h:inputText value="#{item.name}" size="20" rendered="#{item.editable}" />
+		<h:outputText value="#{item.name}" rendered="#{not item.editable}" />
+	</h:column>
+	
+	
+
+		<h:column>
+		<!-- next column components -->
+			<f:facet name="header">
+				Password
+			</f:facet>
+				<h:inputText value="#{item.password}" size="20" rendered="#{item.editable}" />
+				<h:outputText value="#{item.password}" rendered="#{not item.editable}" />
+		</h:column>
+		<!-- add more columns, as desired -->
+		
+		
+		<h:column>
+		<!-- next column components -->
+			<f:facet name="header">
+				Action
+			</f:facet>
+				<h:commandLink value="Edit" action="#{user.editUser(item)}"  rendered="#{not item.editable}"/>&nbsp;
+			 	<h:commandLink value="Delete" action="#{user.deleteUser(item)}" />
+		</h:column>
+		
+</h:dataTable>
+
+		<h:commandButton value="Save" action="#{user.saveUser}" />
+
+
+</h:form>
+
+
+</h:body>
+</html>
